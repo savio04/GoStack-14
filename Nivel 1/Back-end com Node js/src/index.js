@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const { v4 } = require('uuid')
 
 /*
 *Métodos HTTP
@@ -20,60 +21,60 @@ const app = express()
 
 app.use(express.json())
 
+const projects = []
+
 app.get('/projects', (req,res) => {
+    // Filtro por title
 
-    const {title} = req.query
+    const { title } = req.query
+    const results = title ? projects.filter(project => project.title.includes(title))
+    :projects
 
-    return res.json({
-        title
-    })
+    return res.json(results)
 })
 
 app.post('/projects', (req,res) => {
 
-    const { title} = req.body
+    const { title, owner} = req.body
+    const project_requeste = {id:v4(),title,owner}
+    projects.push(project_requeste)
 
-    return res.json({
-        title
-    })
 
-    // return res.json({
-    //     projeto1: 'martelo',
-    //     projeto2: 'capivara',
-    //     projeto3: 'estante'
-    // })
+    return res.json(project_requeste)
 })
 
 app.put('/projects/:id', (req,res) => {
 
     const { id } = req.params
+    const { title, owner} = req.body
+    const projectIndex = projects.findIndex(project => project.id == id)
 
-    return res.json({
-        id
-    })
-    // return res.json({
-    //     projeto1: 'martelo',
-    //     projeto2: 'capivara',
-    //     projeto3: 'estante',
-    //     projeto4: 'projeto4'
-    // })
+    if(projectIndex < 0){
+        return res.status(400).json({
+            error: 'Project not found'
+        })
+    }
 
+    const project_requeste = {
+        id,
+        title,
+        owner
+    }
+
+    projects.splice(projectIndex,1,project_requeste)
+
+    return res.json(projects)
 })
 
 app.delete('/projects/:id', (req,res) => {
 
     const { id } = req.params
 
-    return res.json({
-        id_delete: id
-    })
+    const projectIndex = projects.findIndex(project => project.id == id)
 
-    // return res.json({
-    //     projeto1: 'martelo',
-    //     projeto2: 'capivara',
-    //     projeto3: 'estante',
-    // })
+    projects.splice(projectIndex,1)
 
+    return res.status(204).send()
 })
 
 app.listen(2222, () => {

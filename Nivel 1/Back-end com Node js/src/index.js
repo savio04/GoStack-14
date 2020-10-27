@@ -10,41 +10,69 @@ const app = express()
 *DELETE: Apagar/excluir uma informação do backend
 */
 
+/**
+ * Tipos de parâmetros
+ * 
+ * Query params: Principalmente para Filtros e Listagens
+ * Route Params: Identificar recursos na hora de deletar/atualizar
+ * Request body
+ */
+
 app.use(express.json())
 
 app.get('/projects', (req,res) => {
+
+    const {title} = req.query
+
     return res.json({
-        projeto1: 'martelo',
-        projeto2: 'capivara'
+        title
     })
 })
 
 app.post('/projects', (req,res) => {
+
+    const { title} = req.body
+
     return res.json({
-        projeto1: 'martelo',
-        projeto2: 'capivara',
-        projeto3: 'estante'
+        title
     })
+
+    // return res.json({
+    //     projeto1: 'martelo',
+    //     projeto2: 'capivara',
+    //     projeto3: 'estante'
+    // })
 })
 
 app.put('/projects/:id', (req,res) => {
 
+    const { id } = req.params
+
     return res.json({
-        projeto1: 'martelo',
-        projeto2: 'capivara',
-        projeto3: 'estante',
-        projeto4: 'projeto4'
+        id
     })
+    // return res.json({
+    //     projeto1: 'martelo',
+    //     projeto2: 'capivara',
+    //     projeto3: 'estante',
+    //     projeto4: 'projeto4'
+    // })
 
 })
 
 app.delete('/projects/:id', (req,res) => {
 
+    const { id } = req.params
+
     return res.json({
-        projeto1: 'martelo',
-        projeto2: 'capivara',
-        projeto3: 'estante',
+        id_delete: id
     })
+
+    // return res.json({
+    //     projeto1: 'martelo',
+    //     projeto2: 'capivara',
+    //     projeto3: 'estante',
+    // })
 
 })
 

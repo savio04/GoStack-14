@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
-const { v4 } = require('uuid')
+const { v4, validate } = require('uuid')
 
+app.use(express.json())
 /*
 *Métodos HTTP
 *
@@ -19,10 +20,42 @@ const { v4 } = require('uuid')
  * Request body
  */
 
-app.use(express.json())
+ /**
+  * Middleware:
+  * 
+  * É um interceptador de requisição
+  * - Interronpe totalmente a requisição
+  * - Altera os dados da requisição
+  */
+
 
 const projects = []
+ 
 
+function logRequest(req,res,next){
+    const { method, url } = req
+
+    const logLabel = `[${method.toUpperCase()}] ${url}`
+
+    console.time(logLabel)
+    next()
+    console.timeEnd(logLabel)
+}
+
+// função que valida o id
+
+function validateID(req,res,next){
+    const {id} = req.params
+
+    if(!validate(id)){
+        return res.status(400).json({error: "ID not found"})
+    }
+
+    return next()
+}
+
+app.use(logRequest)
+app.use('/projects/:id', validateID)
 app.get('/projects', (req,res) => {
     // Filtro por title
 

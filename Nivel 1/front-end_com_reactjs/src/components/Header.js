@@ -1,9 +1,12 @@
 import React from 'react'
 
 
-function Header(){
+function Header(props){
     return(
-        <h2>Ola teste header</h2>
+        <header>
+            <h2>{props.nome}</h2>
+            {props.children}
+        </header>
     )
 }
 

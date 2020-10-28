@@ -1,8 +1,11 @@
 const express = require('express')
 const app = express()
 const { v4, validate } = require('uuid')
+const cors = require('cors')
 
+app.use(cors())
 app.use(express.json())
+
 /*
 *Métodos HTTP
 *
@@ -59,11 +62,11 @@ app.use('/projects/:id', validateID)
 app.get('/projects', (req,res) => {
     // Filtro por title
 
-    const { title } = req.query
-    const results = title ? projects.filter(project => project.title.includes(title))
-    :projects
+    // const { title } = req.query
+    // const results = title ? projects.filter(project => project.title.includes(title))
+    // :projects
 
-    return res.json(results)
+    return res.json(projects)
 })
 
 app.post('/projects', (req,res) => {

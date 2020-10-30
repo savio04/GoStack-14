@@ -11,6 +11,16 @@ function App(){
             .then(response => {setProjects(response.data)})
     }, [])
 
+    async function handleAddProject(){
+        const dados = await api.post('projects', {
+            title: 'Projeto vindo do front-end',
+            owner: 'Sávio'
+        })
+
+        const response = dados.data
+        setProjects([...projects,response])
+    }
+
     return(
         <>
             <StatusBar barStyle = 'light-content' backgroundColor = '#8A05BE' />
@@ -22,6 +32,9 @@ function App(){
                         <Text style= {styles.texto} > {item.title} </Text>
                     )}
                 />
+                <TouchableOpacity onPress = { handleAddProject } style = {styles.button}>
+                    <Text style = {styles.buttonText} >Adiconar projeto</Text>
+                </TouchableOpacity>
             </SafeAreaView>
         </>
     )
@@ -35,6 +48,19 @@ const styles = StyleSheet.create({
     texto: {
         color: '#FFF',
         fontSize: 20
+    },
+    button:{
+        backgroundColor: 'green',
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        marginBottom: 10,
+        marginHorizontal: 20
+    },
+    buttonText:{
+        color: '#FFF',
+        fontSize: 15
     }
 })
 

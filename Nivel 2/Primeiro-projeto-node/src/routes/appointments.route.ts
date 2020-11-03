@@ -1,19 +1,31 @@
 import { Router} from 'express'
-import { v4 } from 'uuid'
+import { parseISO, startOfHour } from 'date-fns'
+import AppointmentsRepository from '../repositories/AppointmentsRepository'
 const appointmentsRoute = Router()
 
-const appointments = []
+const ClassAppointmentsRepository = new AppointmentsRepository()
+
+appointmentsRoute.get('/',(request,response) => {
+  const appointments = ClassAppointmentsRepository.showAppointments()
+  return response.json(appointments)
+})
+
+
 
 appointmentsRoute.post('/',(request,response) => {
   const { provider, date } = request.body
 
-  const appointment = {
-    id: v4(),
-    provider,
-    date
+  const parseDate = startOfHour(parseISO(date))
+
+  const findAppointmentSamedate = ClassAppointmentsRepository.findByDate(parseDate)
+
+  if(findAppointmentSamedate){
+    return response.status(400).json({
+      messageErro: "existing Date"
+    })
   }
 
-  appointments.push(appointment)
+  const appointment =  ClassAppointmentsRepository.Create(provider,parseDate)
 
   return response.json(appointment)
 })

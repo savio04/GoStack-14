@@ -1,20 +1,18 @@
 /**
  * Nesse arquivo fica o formato dos dados
  */
-import { v4 } from "uuid";
+import { Entity,Column, PrimaryGeneratedColumn } from 'typeorm'
 
+@Entity('appointments')
 class Appointmant{
+  @PrimaryGeneratedColumn('uuid')
   id:string;
 
+  @Column()
   provider:string;
 
+  @Column('time with time zone')
   date:Date;
-
-  constructor({provider,date}:Omit<Appointmant, 'id'>){
-    this.id = v4()
-    this.provider = provider
-    this.date = date
-  }
 }
 
 export default Appointmant

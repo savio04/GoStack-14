@@ -10,7 +10,7 @@ class Appointmant{
 
   date:Date;
 
-  constructor(provider:string,date:Date){
+  constructor({provider,date}:Omit<Appointmant, 'id'>){
     this.id = v4()
     this.provider = provider
     this.date = date

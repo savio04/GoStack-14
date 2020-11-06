@@ -2,40 +2,17 @@
  * Nesse arquivo eh onde iremos alterar o valor da variavel que armazena os dados
  */
 import Appointment from '../models/Appointments'
-import { isEqual } from 'date-fns'
+import { EntityRepository, Repository } from 'typeorm'
 
-interface CretateAppointmentsDTO{
-  provider:string;
-  date:Date;
-}
+@EntityRepository(Appointment)
+class AppointmentsRepository extends Repository<Appointment>{
 
-class AppointmentsRepository{
-  private appointments:Array<Appointment>
-
-  constructor(){
-    this.appointments = []
-  }
-
-  public showAppointments(){
-    return this.appointments
-  }
-
-  public findByDate(date:Date){
-    const findAppointmentsInSameDate = this.appointments.find(appointment =>
-      isEqual(date,appointment.date))
-
-      return findAppointmentsInSameDate || null
-  }
-
-  public Create({provider,date}:CretateAppointmentsDTO){
-    const appointment = new Appointment({
-      provider,
-      date
+  public async findByDate(date:Date){
+    const findAppointment = await this.findOne({
+      where: {date}
     })
 
-    this.appointments.push(appointment)
-
-    return appointment
+    return findAppointment || null
   }
 }
  export default AppointmentsRepository

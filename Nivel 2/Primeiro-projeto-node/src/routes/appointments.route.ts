@@ -10,7 +10,6 @@ const appointmentsRoute = Router()
 appointmentsRoute.use(ensureAuthticated)
 
 appointmentsRoute.get('/',async (request,response) => {
-
   console.log(request.user)
   const ClassAppointmentsRepository = getCustomRepository(AppointmentsRepository)
   const appointments = await ClassAppointmentsRepository.find()

@@ -19,15 +19,15 @@ export default function ensureAuthticated(request:Request,response:Response,next
 
 
     const [,token] = authHeader.split(' ')
-
     try{
       const tokedecod = verify(token,Jwt.secret)
-
       const { sub } = tokedecod as TokenDTO
 
-      request.user.id = sub
-
+      request.user = {
+        id:sub
+      }
       return next()
+
     }catch{
       throw new Error('Token ivalid')
     }

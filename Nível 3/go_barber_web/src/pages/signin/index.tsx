@@ -2,6 +2,8 @@ import React from 'react'
 import { Content, Container, Background } from './styles'
 import Logo from '../../assets/logo.svg'
 import { FiLogIn } from 'react-icons/fi'
+import Button from '../../components/Button'
+import Input from '../../components/Input'
 
 const SignIn: React.FC = () => {
   return (
@@ -12,10 +14,10 @@ const SignIn: React.FC = () => {
         <form >
           <h1>Faça seu logon</h1>
 
-          <input placeholder = 'E-mail'/>
-          <input placeholder = 'Senha'/>
+          <Input placeholder = 'E-mail'/>
+          <Input type = 'password' placeholder = 'Senha'/>
 
-          <button type = 'submit'>Enviar</button>
+          <Button type = 'submit' title = 'Enviar' />
 
           <a href="forgat">Esqueci minha senha</a>
         </form>

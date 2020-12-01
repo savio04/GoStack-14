@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import backImage from '../../assets/sign-in-background.png'
+import backImage from '../../assets/sign-up-background.png'
 import { shade } from 'polished'
 
 export const Container = styled.div`
@@ -20,8 +20,8 @@ export const Content = styled.div`
   max-width: 700px;
 
   form{
-    margin: 50px 0;
-    max-width: 340px;
+    margin: 40px 0;
+    width: 320px;
     text-align: center;
 
     h1{
@@ -41,7 +41,7 @@ export const Content = styled.div`
   }
 
   > a{
-    color: #ff9000;
+    color: #F4EDE8;
     display: block;
     margin-top: 24px;
     text-decoration: none;
@@ -51,7 +51,7 @@ export const Content = styled.div`
     align-items: center;
 
     &:hover{
-      color: ${shade(0.2, '#ff9000')}
+      color: ${shade(0.2, '#F4EDE8')}
     }
     svg{
       margin-right: 16px;

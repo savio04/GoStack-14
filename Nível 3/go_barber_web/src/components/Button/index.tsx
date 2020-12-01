@@ -4,8 +4,8 @@ import { ButtonStyle } from './styles'
 
 type buttonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: React.FC<buttonProps> = ({title, type}) => {
-  return <ButtonStyle type = {type}> {title} </ButtonStyle>
+const Button: React.FC<buttonProps> = (props) => {
+  return <ButtonStyle {...props}></ButtonStyle>
 }
 
 export default Button

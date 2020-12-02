@@ -5,23 +5,27 @@ import { FiLogIn,FiMail,FiLock } from 'react-icons/fi'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { Link } from 'react-router-dom'
+import { Form } from '@unform/web'
 
 const SignIn: React.FC = () => {
+  function handleSubmit(data:object){
+    console.log(data)
+  }
   return (
     <Container>
       <Content>
         <img src = {Logo} alt = 'GoBarber' />
 
-        <form >
+        <Form onSubmit = {handleSubmit} >
           <h1>Faça seu logon</h1>
 
-          <Input placeholder = 'E-mail' icon = {FiMail} />
-          <Input type = 'password' placeholder = 'Senha' icon = {FiLock} />
+          <Input placeholder = 'E-mail' name = 'email' icon = {FiMail} />
+          <Input name = 'email' type = 'password' placeholder = 'Senha' icon = {FiLock} />
 
           <Button type = 'submit'>Enviar</Button>
 
           <a href="forgat">Esqueci minha senha</a>
-        </form>
+        </Form>
 
         <Link to="/signup">
           <FiLogIn size = {20} />

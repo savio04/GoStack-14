@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import { Jwt } from '../config/authConfig'
+import AppError from '../errors/AppError'
 import User from '../models/Users'
 
 interface AuthRequest{
@@ -19,13 +20,13 @@ class CreateAuthService{
     })
 
     if(!user){
-      throw new Error('incorrect email/password combinat')
+      throw new AppError('incorrect email/password combinat',401)
     }
 
     const passwordMatch = await compare(password,user.password)
 
     if(!passwordMatch){
-      throw new Error('incorrect email/password combinat')
+      throw new AppError('incorrect email/password combinat',401)
     }
 
     const token = sign({},Jwt.secret, {

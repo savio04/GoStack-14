@@ -1,5 +1,6 @@
 import { verify } from 'jsonwebtoken'
 import { Jwt } from '../config/authConfig'
+import AppError from '../errors/AppError'
 import { Request,Response,NextFunction } from 'express'
 
 
@@ -14,7 +15,7 @@ export default function ensureAuthticated(request:Request,response:Response,next
     const authHeader = request.headers.authorization
 
     if(!authHeader){
-        throw new Error('JWT token not found')
+        throw new AppError('JWT token not found',401)
     }
 
 
@@ -29,6 +30,6 @@ export default function ensureAuthticated(request:Request,response:Response,next
       return next()
 
     }catch{
-      throw new Error('Token ivalid')
+      throw new AppError('Token ivalid',401)
     }
   }

@@ -1,6 +1,8 @@
 import {startOfHour} from 'date-fns'
 import { getCustomRepository } from 'typeorm'
 import AppointmentsRepository from '../repositories/AppointmentsRepository'
+import AppError from '../errors/AppError'
+
 
 interface RequestDTO{
   provider_id:string;
@@ -20,7 +22,7 @@ class CreateAppointmentService{
     const findAppointmentSamedate = await appointmentsRepository.findByDate(appointmentStart)
 
     if(findAppointmentSamedate){
-      throw new Error('existing date')
+      throw new AppError('existing date',400)
     }
 
     const appointment =  appointmentsRepository.create({

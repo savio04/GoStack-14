@@ -48,7 +48,7 @@ const SignUp: React.FC = () => {
           <Input name = 'email' placeholder = 'E-mail' icon = {FiMail} />
           <Input name = 'password' type = 'password' placeholder = 'Senha' icon = {FiLock} />
 
-          <Button type = 'submit'>Enviar</Button>
+          <Button type = 'submit'>Cadastar</Button>
         </Form>
 
         <Link to="/">

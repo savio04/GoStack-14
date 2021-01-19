@@ -8,26 +8,30 @@ import { Link } from 'react-router-dom'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
+import getValidationErrors from '../../Utils/getValidationErros'
 
 const SignIn: React.FC = () => {
 
   const formRef = useRef<FormHandles>(null)
   
   const handleSubmit = useCallback(async (data:object) => {
-
     try{
+      formRef.current?.setErrors({})
+
       const schema = Yup.object().shape({
         email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail valido'),
-        password: Yup.string().min(8, 'No minimo 8 digitos')
+        password: Yup.string().required('Senha obrigatória')
       })
 
       await schema.validate(data,{
-        abortEarly: true
+        abortEarly: false
       })
     }catch(err){
-      console.log(err)
+      const errors = getValidationErrors(err)
+      formRef.current?.setErrors(errors)
     }
   }, [])
+
   return (
     <Container>
       <Content>
@@ -37,7 +41,7 @@ const SignIn: React.FC = () => {
           <h1>Faça seu logon</h1>
 
           <Input placeholder = 'E-mail' name = 'email' icon = {FiMail} />
-          <Input name = 'email' type = 'password' placeholder = 'Senha' icon = {FiLock} />
+          <Input name = 'password' type = 'password' placeholder = 'Senha' icon = {FiLock} />
 
           <Button type = 'submit'>Enviar</Button>
 

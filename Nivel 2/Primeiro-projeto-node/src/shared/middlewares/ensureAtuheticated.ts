@@ -1,5 +1,5 @@
 import { verify } from 'jsonwebtoken'
-import { Jwt } from '../config/authConfig'
+import { Jwt } from '../../config/authConfig'
 import AppError from '../errors/AppError'
 import { Request,Response,NextFunction } from 'express'
 

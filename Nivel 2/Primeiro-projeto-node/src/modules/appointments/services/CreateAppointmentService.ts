@@ -1,7 +1,7 @@
 import {startOfHour} from 'date-fns'
 import { getCustomRepository } from 'typeorm'
 import AppointmentsRepository from '../repositories/AppointmentsRepository'
-import AppError from '../errors/AppError'
+import AppError from '../../../shared/errors/AppError'
 
 
 interface RequestDTO{

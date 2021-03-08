@@ -1,9 +1,9 @@
 {
   "type": "postgres",
   "host":"localhost",
-  "port": 54352,
+  "port": 5432,
   "username":"postgres",
-  "password": "01075783",
+  "password": "5av100404",
   "database": "gostack_gobarber",
   "entities": [
 		"./src/models/*.ts"

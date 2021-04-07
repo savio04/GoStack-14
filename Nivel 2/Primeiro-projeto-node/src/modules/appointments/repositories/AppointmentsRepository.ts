@@ -1,7 +1,7 @@
 /**
  * Nesse arquivo eh onde iremos alterar o valor da variavel que armazena os dados
  */
-import Appointment from '../entities/Appointments'
+import Appointment from '@modules/appointments/infra/entities/Appointments'
 import { EntityRepository, Repository } from 'typeorm'
 
 @EntityRepository(Appointment)

@@ -1,6 +1,6 @@
 import { verify } from 'jsonwebtoken'
-import { Jwt } from '../../config/authConfig'
-import AppError from '../errors/AppError'
+import { Jwt } from '@config/authConfig'
+import AppError from '@shared/errors/AppError'
 import { Request,Response,NextFunction } from 'express'
 
 

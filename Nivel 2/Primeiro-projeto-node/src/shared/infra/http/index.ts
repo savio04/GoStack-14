@@ -5,9 +5,9 @@ import express, {Request,Response,NextFunction} from 'express'
 
 import routes from './routes/index'
 import cors from 'cors'
-import uploadConfig from './config/upload'
-import './shared/database'
-import AppError from './shared/errors/AppError'
+import uploadConfig from '@config/upload'
+import '../typeorm'
+import AppError from '@shared/errors/AppError'
 
 const app = express()
 
